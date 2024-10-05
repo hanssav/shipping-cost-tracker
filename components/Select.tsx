@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const StyledLabel = styled.label`
   font-size: 1rem;
@@ -41,8 +41,8 @@ const StyledSelectOptions = styled.ul`
 
 const StyledOption = styled.li<{ isSelected: boolean }>`
   padding: 0.75rem;
-  background-color: ${(props) => (props.isSelected ? '#3b82f6' : 'white')};
-  color: ${(props) => (props.isSelected ? 'white' : '#000')};
+  background-color: ${(props) => (props.isSelected ? "#3b82f6" : "white")};
+  color: ${(props) => (props.isSelected ? "white" : "#000")};
   cursor: pointer;
 
   &:hover {
@@ -71,14 +71,19 @@ const StyledSelectWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-
-const SelectWithSearch: React.FC<SelectProps> = ({ label, options, onChange, id, disabled }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] = useState<string>('');
+const SelectWithSearch: React.FC<SelectProps> = ({
+  label,
+  options,
+  onChange,
+  id,
+  disabled,
+}) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
 
   const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(searchTerm.toLowerCase())
+    option.label.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const handleOptionClick = (value: string) => {
@@ -88,27 +93,27 @@ const SelectWithSearch: React.FC<SelectProps> = ({ label, options, onChange, id,
   };
 
   const clearSelection = () => {
-    setSelectedOption('');
-    onChange(''); 
+    setSelectedOption("");
+    onChange("");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' || e.key === 'Delete') {
+    if (e.key === "Backspace" || e.key === "Delete") {
       clearSelection();
     }
   };
 
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (isOpen && (e.key === 'Backspace' || e.key === 'Delete')) {
+      if (isOpen && (e.key === "Backspace" || e.key === "Delete")) {
         clearSelection();
       }
     };
 
-    window.addEventListener('keydown', handleGlobalKeyDown);
+    window.addEventListener("keydown", handleGlobalKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleGlobalKeyDown);
+      window.removeEventListener("keydown", handleGlobalKeyDown);
     };
   }, [isOpen]);
 
@@ -118,12 +123,16 @@ const SelectWithSearch: React.FC<SelectProps> = ({ label, options, onChange, id,
       <StyledDropdownWrapper>
         <StyledSearchInput
           id={id}
-          value={selectedOption ? options.find((opt) => opt.value === selectedOption)?.label || '' : searchTerm}
+          value={
+            selectedOption
+              ? options.find((opt) => opt.value === selectedOption)?.label || ""
+              : searchTerm
+          }
           onClick={() => setIsOpen(!isOpen)}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search..."
           disabled={disabled}
-          onKeyDown={handleKeyDown}  
+          onKeyDown={handleKeyDown}
         />
         {isOpen && !disabled && (
           <StyledSelectOptions>
@@ -148,4 +157,3 @@ const SelectWithSearch: React.FC<SelectProps> = ({ label, options, onChange, id,
 };
 
 export default SelectWithSearch;
-

@@ -1,9 +1,9 @@
-import { signOutUser } from '@/store/authSlice';
-import Link from 'next/link';
-import Router from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { RootState } from '../store';
+import { signOutUser } from "@/store/authSlice";
+import Link from "next/link";
+import Router from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import { RootState } from "../store";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
   const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault();
     dispatch(signOutUser());
-    Router.push('/');
+    Router.push("/");
   };
 
   return (

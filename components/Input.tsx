@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const InputContainer = styled.div`
   margin-bottom: 16px;
@@ -24,7 +24,12 @@ type InputProps = {
   type?: string;
 };
 
-const Input: React.FC<InputProps> = ({ label, value, onChange, type = 'text' }) => (
+const Input: React.FC<InputProps> = ({
+  label,
+  value,
+  onChange,
+  type = "text",
+}) => (
   <InputContainer>
     <Label>{label}</Label>
     <InputField value={value} onChange={onChange} type={type} />

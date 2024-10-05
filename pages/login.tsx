@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import styled from 'styled-components';
-import Header from '@/components/Header';
-import { registerUser } from '@/store/authSlice';
-import { useDispatch } from 'react-redux';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
+import Input from "../components/Input";
+import Button from "../components/Button";
+import styled from "styled-components";
+import Header from "@/components/Header";
+import { registerUser } from "@/store/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginContainer = styled.div`
   max-width: 400px;
@@ -22,39 +22,51 @@ const ErrorText = styled.p`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://dummyjson.com/auth/login', {
+      const response = await axios.post("https://dummyjson.com/auth/login", {
         username: email,
         password: password,
       });
       const { accessToken } = response.data;
       dispatch(registerUser(response));
-    
-      localStorage.setItem('token', accessToken);
-      router.push('/dashboard');
+
+      localStorage.setItem("token", accessToken);
+      router.push("/dashboard");
     } catch (err) {
-      setError('Login failed. Please check your credentials.');
+      setError("Login failed. Please check your credentials.");
     }
   };
-  
 
   return (
     <>
-        <Header />
-        <LoginContainer>
-            <h1>Login</h1>
-            <Input label="Username" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Input label="Password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
-            {error && <ErrorText>{error}</ErrorText>}
-            <Button label="Login" onClick={handleLogin} disabled={!email || !password} />
-        </LoginContainer>
+      <Header />
+      <LoginContainer>
+        <h1>Login</h1>
+        <Input
+          label="Username"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
+        {error && <ErrorText>{error}</ErrorText>}
+        <Button
+          label="Login"
+          onClick={handleLogin}
+          disabled={!email || !password}
+        />
+      </LoginContainer>
     </>
   );
 };

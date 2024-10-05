@@ -8,4 +8,6 @@
     NEXT_PUBLIC_RAJAONGKIR_API=https://api.rajaongkir.com
 4. run the project 'npm run dev'
 
-
+# Login Apps
+username: emilys
+password: emilyspass
