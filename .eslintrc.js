@@ -16,6 +16,7 @@ module.exports = {
         'prettier/prettier': 'error',
         '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/explicit-function-return-type': 'off',
-        'no-console': 'warn',
+        "no-console": process.env.NODE_ENV === "production" ? "off" : "warn",
+        "no-unused-vars": process.env.NODE_ENV === "production" ? "off" : "warn",
     },
 };
